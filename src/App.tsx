@@ -6,7 +6,7 @@ function App() {
   const [url, setUrl] = useState('https://example.com')
   const qrRef = useRef<HTMLDivElement>(null)
 
-  const downloadQR = () => {
+  const downloadQR = (size: number) => {
     const svg = qrRef.current?.querySelector('svg')
     if (!svg) return
 
@@ -25,15 +25,15 @@ function App() {
 
     img.onload = () => {
       // Configurar el tamaño del canvas
-      canvas.width = img.width
-      canvas.height = img.height
+      canvas.width = size
+      canvas.height = size
 
       // Dibujar fondo blanco
       ctx.fillStyle = 'white'
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
       // Dibujar la imagen del QR
-      ctx.drawImage(img, 0, 0)
+      ctx.drawImage(img, 0, 0, size, size)
 
       // Convertir canvas a PNG y descargar
       canvas.toBlob((blob) => {
@@ -81,14 +81,17 @@ function App() {
               <div ref={qrRef} style={{ display: 'inline-block', padding: '15px', backgroundColor: '#fff', border: '1px solid #e0e0e0' }}>
                 <QRCode 
                   value={url} 
-                  size={200}
+                  size={200}   // Preview is 200px
                   level="H"
                 />
               </div>
             </div>
 
             <div className="center-align">
-              <button onClick={downloadQR} className="btn waves-effect waves-light blue">
+              <button
+                onClick={() => downloadQR(1500)} // Download will be 1500px
+                className="btn waves-effect waves-light blue"
+              >
                 <i className="material-icons left">file_download</i>
                 Descargar PNG
               </button>
