@@ -1,0 +1,27 @@
+body {
+  background-color: #f5f5f5;
+}
+
+h4 {
+  margin-top: 10px;
+  margin-bottom: 30px;
+  font-weight: 400;
+}
+
+.card-panel {
+  padding: 30px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.input-field input:focus {
+  border-bottom: 1px solid #2196F3 !important;
+  box-shadow: 0 1px 0 0 #2196F3 !important;
+}
+
+.input-field input:focus + label {
+  color: #2196F3 !important;
+}
+
+.input-field .prefix.active {
+  color: #2196F3;
+}
